@@ -12,8 +12,8 @@ function PlaceCardItem({place,trips}) {
           trips&&GetPlacePhoto();
         },[trips])
         const GetPlacePhoto=async()=>{
-          const apiKey = import.meta.env.VITE_GOOGLE_PLACE_API_KEY; 
-          const cseId = import.meta.env.VITE_CSE_ID; 
+          const apiKey = 'AIzaSyC6djmjWYtnw1MVMNP3FWNMQyWMflouDkU'; 
+          const cseId = 'd1c83c96ff1f344e7'; 
           const searchTerm = place?.placeName+","+trips?.userSelection?.location;
           
           const apiUrl = `https://customsearch.googleapis.com/customsearch/v1?q=${searchTerm}&cx=${cseId}&key=${apiKey}&searchType=image`;

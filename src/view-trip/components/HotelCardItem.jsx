@@ -10,7 +10,7 @@ function HotelCardItem({trip,i}) {
         trip&&GetPlacePhoto();
       },[trip])
       const GetPlacePhoto=async()=>{
-        const apiKey = 'AIzaSyAnlZmZbZXQKCP2sqEvrU40Vm4IesrQMuQ'; 
+        const apiKey = 'AIzaSyC6djmjWYtnw1MVMNP3FWNMQyWMflouDkU'; 
         const cseId = 'd1c83c96ff1f344e7'; 
         const searchTerm = trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelName+","+trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelAddress;
         
