@@ -9,12 +9,10 @@ function HotelCardItem({trip,i}) {
       useEffect(()=>{
         trip&&GetPlacePhoto();
       },[trip])
-      const GetPlacePhoto=async()=>{
-        const apiKey = 'AIzaSyC6djmjWYtnw1MVMNP3FWNMQyWMflouDkU'; 
-        const cseId = 'd1c83c96ff1f344e7'; 
+      const GetPlacePhoto=async()=>{ 
         const searchTerm = trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelName+","+trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelAddress;
         
-        const apiUrl = `https://customsearch.googleapis.com/customsearch/v1?q=${searchTerm}&cx=${cseId}&key=${apiKey}&searchType=image`;
+        const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image';
         
         fetch(apiUrl)
           .then(response => response.json())
@@ -36,9 +34,9 @@ function HotelCardItem({trip,i}) {
             <img src= {PhotoUrl?PhotoUrl:'https://placehold.co/600x400'} className="rounded-lg h-[200px] w-full object-cover"alt="" />
             <div className='my-2 flex flex-col gap-2'>
                <h2 className='font-medium text-black'> {trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelName}</h2>
-               <h2 className='text-xs text-gray-500'>📍{trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelAddress}</h2>
-               <h2 className='text-sm text-black'>💵{trip?.tripData?.[0]?.hotelOptions?.[i]?.price}</h2>
-               <h2 className='text-sm text-black'>⭐{trip?.tripData?.[0]?.hotelOptions?.[i]?.rating}</h2>
+               <h2 className='text-xs text-gray-500'>📍 {trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelAddress}</h2>
+               <h2 className='text-sm text-black'>💵 {trip?.tripData?.[0]?.hotelOptions?.[i]?.price}</h2>
+               <h2 className='text-sm text-black'>⭐ {trip?.tripData?.[0]?.hotelOptions?.[i]?.rating} Stars</h2>
             </div>
            </div></Link>
   )

@@ -10,11 +10,9 @@ function InfoSection({trip}) {
     trip&&GetPlacePhoto();
   },[trip])
   const GetPlacePhoto=async()=>{
-const apiKey = 'AIzaSyC6djmjWYtnw1MVMNP3FWNMQyWMflouDkU'; 
-const cseId = 'd1c83c96ff1f344e7'; 
 const searchTerm = trip?.userSelection?.location;
 
-const apiUrl = `https://customsearch.googleapis.com/customsearch/v1?q=${searchTerm}&cx=${cseId}&key=${apiKey}&searchType=image`;
+const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image';
 
 fetch(apiUrl)
   .then(response => response.json())
@@ -38,9 +36,9 @@ fetch(apiUrl)
           {trip?.userSelection?.location}
         </h2>
         <div className='flex gap-5'>
-          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>📅{trip?.userSelection?.noOfDays} Days</h2>
-          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>💲Budget: {trip?.userSelection?.budget}</h2>
-          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>✈No. of Traveler: {trip?.userSelection?.traveler} Days</h2>
+          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>📅 {trip?.userSelection?.noOfDays} Days</h2>
+          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>💲 Budget: {trip?.userSelection?.budget}</h2>
+          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>✈ No. of Traveler: {trip?.userSelection?.traveler}</h2>
         </div>
       </div>
       <Button><IoSend /></Button>

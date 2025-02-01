@@ -36,4 +36,52 @@ export const SelectBudgetOptions=[{
     desc:'Dont worry about cost',
     icon:'💸'
 }]
-export const AI_PROMPT='Generate Travel Plan for Location: {location}, for {totalDays} Days for {traveler} with a {budget} budget, give me Hotels options list with HotelName, Hotel address, Price, hotel image url, rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Place address, ticket Pricing, Time travel each of the location for {totalDays} days with each day plan with best time to visit each place in JSON format.'
+
+
+export const AI_PROMPT=`"Generate Travel Plan for Location: {location}, for {totalDays} Days for {traveler} with a {budget} budget, give me Hotels options list with HotelName, Hotel address, Price with currency, hotel image url, rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Place address, best time to visit, ticket Pricing with currency, Time to travel to each of the location from a landmark for {totalDays} days with each day plan in following JSON format. 
+
+[{ 
+
+  "hotelOptions": [ 
+
+    { 
+
+      "description": "",  
+
+      "hotelAddress": "",  
+
+      "hotelImageUrl": "",  
+
+      "hotelName": "",  
+
+      "price": "",  
+
+      "rating": ""  
+
+    } 
+
+  ],  
+
+  "itinerary": {  
+
+    "day1": {  
+
+      "places": [{ "bestTimeToVisit": "",  
+
+        "placeDetails": "",  
+
+        "placeImageUrl": "",  
+
+        "placeName": "",  
+
+        "ticketPricing": "",  
+
+        "timeTravel": ""  
+
+      }]  
+
+    }  
+
+  } 
+
+}]"`;

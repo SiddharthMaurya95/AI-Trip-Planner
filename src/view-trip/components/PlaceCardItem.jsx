@@ -12,11 +12,9 @@ function PlaceCardItem({place,trips}) {
           trips&&GetPlacePhoto();
         },[trips])
         const GetPlacePhoto=async()=>{
-          const apiKey = 'AIzaSyC6djmjWYtnw1MVMNP3FWNMQyWMflouDkU'; 
-          const cseId = 'd1c83c96ff1f344e7'; 
           const searchTerm = place?.placeName+","+trips?.userSelection?.location;
           
-          const apiUrl = `https://customsearch.googleapis.com/customsearch/v1?q=${searchTerm}&cx=${cseId}&key=${apiKey}&searchType=image`;
+          const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image';
           
           fetch(apiUrl)
             .then(response => response.json())
@@ -39,7 +37,8 @@ function PlaceCardItem({place,trips}) {
       <div>
         <h2 className='font-bold text-lg text-black'>{place?.placeName}</h2>
         <h2 className='text-sm text-gray-500'>{place?.placeDetails}</h2>
-        <h2 className='text-sm text-gray-500  mt-2'>🕑{place?.timeTravel}</h2>
+        <h2 className='text-sm text-gray-500  mt-2'>🕑 {place?.timeTravel}</h2>
+        <h2 className='text-sm text-gray-500  mt-2'>💴 {place?.ticketPricing}</h2>
       </div>
     </div>
     </Link>
