@@ -5,12 +5,10 @@ function UserTripCardItem({trip}) {
       useEffect(()=>{
         trip&&GetPlacePhoto();
       },[trip])
-      const GetPlacePhoto=async()=>{
-    const apiKey = 'AIzaSyC6djmjWYtnw1MVMNP3FWNMQyWMflouDkU'; 
-    const cseId = 'd1c83c96ff1f344e7'; 
+      const GetPlacePhoto=async()=>{ 
     const searchTerm = trip?.userSelection?.location;
     
-    const apiUrl = `https://customsearch.googleapis.com/customsearch/v1?q=${searchTerm}&cx=${cseId}&key=${apiKey}&searchType=image`;
+    const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image';
     
     fetch(apiUrl)
       .then(response => response.json())

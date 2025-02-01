@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dialog"
 import { useGoogleLogin } from '@react-oauth/google';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../service/firebaseconfig';
+import { db } from '../service/firebaseConfig.jsx';
 import { useNavigate } from 'react-router-dom';
 function CreateTrip() {
   const [loading,setLoading]=useState(false);
