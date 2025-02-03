@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
 import {googleLogout} from '@react-oauth/google'
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from "react-icons/fc";
@@ -44,10 +45,10 @@ const login=useGoogleLogin({onSuccess:(result)=>GetUserProfile(result),onError:(
     <div className='p-2 shadow-sm flex justify-between items-center'>
      <img src="/logoipsum-280.svg"/>
      <div>{user?<div className='flex items-center gap-3'>
-      <a href='/create-trip'>
-      <Button variant="outline" className='rounded-full'>Create Trip</Button></a>
-      <a href='/my-trips'>
-      <Button variant="outline" className='rounded-full'>My Trips</Button></a>
+      <Link to={'/create-trip'}>
+      <Button variant="outline" className='rounded-full'>Create Trip</Button></Link>
+      <Link to={'/my-trips'}>
+      <Button variant="outline" className='rounded-full'>My Trips</Button></Link>
       <Popover>
   <PopoverTrigger><img src={user?.picture} className='h-[35px] w-[35px] rounded-full bg-white' alt="" /></PopoverTrigger>
   <PopoverContent ><h2 className='cursor-pointer' onClick={()=>{googleLogout();localStorage.clear();window.location.reload();}}>Logout</h2></PopoverContent>

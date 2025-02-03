@@ -10,7 +10,8 @@ function InfoSection({trip}) {
     trip&&GetPlacePhoto();
   },[trip])
   const GetPlacePhoto=async()=>{
-const searchTerm = trip?.userSelection?.location;
+    // if(trip?.tripData?.[0]?.)
+const searchTerm = trip?.userSelection?.location+" landscape";
 
 const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image';
 
