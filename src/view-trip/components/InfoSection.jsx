@@ -3,17 +3,18 @@ import { IoSend } from "react-icons/io5";
 import { Button } from '../../components/ui/button';
 import { GetPlaceDetails } from './GlobalApi';
 import axios from "axios";
-
+import { db,modifyDocument } from '../../service/firebaseConfig';
+import {ref,set,update} from "firebase/database";
 function InfoSection({trip}) {
   const [PhotoUrl,setPhotoUrl]=useState();
   useEffect(()=>{
     trip&&GetPlacePhoto();
   },[trip])
   const GetPlacePhoto=async()=>{
-    // if(trip?.tripData?.[0]?.)
+  if(trip?.locationImageUrl=='url'){
 const searchTerm = trip?.userSelection?.location+" landscape";
 
-const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image';
+const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image&imgSize=large';
 
 fetch(apiUrl)
   .then(response => response.json())
@@ -22,11 +23,16 @@ fetch(apiUrl)
       const firstImage = data.items[0];
       const PhotoUrl=firstImage.link;
       setPhotoUrl(PhotoUrl);
+      modifyDocument('AItrips',trip?.id,{locationImageUrl:PhotoUrl});
     } else {
       console.log('No images found.');
     }
   })
-  .catch(error => console.error('Error:', error));
+  .catch(error => console.error('Error:', error));}
+  else{
+    const PhotoUrl=trip?.locationImageUrl;
+    setPhotoUrl(PhotoUrl);
+  }
   }
   return (
     <div>

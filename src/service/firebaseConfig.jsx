@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getFirestore} from 'firebase/firestore';
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,3 +20,13 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const db=getFirestore(app);
+
+export const modifyDocument = async (collection, documentId, data) => {
+  try {
+    await updateDoc(doc(db, collection, documentId), data);
+    console.log("Document modified successfully!");
+  } catch (error) {
+    console.error("Error modifying document: ", error);
+  }
+};
+

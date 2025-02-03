@@ -63,6 +63,7 @@ const saveAiTrip=async(TripData)=>{
   const user=JSON.parse(localStorage.getItem('user'));
   const docId=Date.now().toString();
   await setDoc(doc(db,'AItrips',docId),{
+    locationImageUrl:'url',
     userSelection:formData,
     tripData:JSON.parse(TripData),
     userEmail:user?.email,
