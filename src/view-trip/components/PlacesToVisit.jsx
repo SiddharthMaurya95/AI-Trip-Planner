@@ -35,7 +35,7 @@ function PlacesToVisit({trip}) {
   return (
     <div>
       <div>
-        <h2 className='font-bold text-lg mt-5'>Place To Visit</h2>
+        <h2 className='font-bold text-xl mt-10'>Places To Visit</h2>
       </div>
       <div>
         {display()}

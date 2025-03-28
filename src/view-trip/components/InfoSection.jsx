@@ -37,15 +37,15 @@ fetch(apiUrl)
   return (
     <div>
       <img src={PhotoUrl?PhotoUrl:'https://placehold.co/600x400'} className="w-full h-[340px] object-cover rounded" alt="" />
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center gap-2'>
       <div className='my-5 flex flex-col gap-2'>
         <h2 className='font-bold text-2xl'>
           {trip?.userSelection?.location}
         </h2>
-        <div className='flex gap-5'>
-          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>📅 {trip?.userSelection?.noOfDays} Days</h2>
-          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>💲 Budget: {trip?.userSelection?.budget}</h2>
-          <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>✈ No. of Traveler: {trip?.userSelection?.traveler}</h2>
+        <div className='flex gap-3'>
+          <h2 className='p-1 px-3 bg-gray-200 text-center rounded-full text-gray-500 text-xs md:text-md'>📅 {trip?.userSelection?.noOfDays} Days</h2>
+          <h2 className='p-1 px-3 bg-gray-200 text-center rounded-full text-gray-500 text-xs md:text-md'>💲 Budget: {trip?.userSelection?.budget}</h2>
+          <h2 className='p-1 px-3 bg-gray-200 text-center rounded-full text-gray-500 text-xs md:text-md'>✈ No. of Traveler: {trip?.userSelection?.traveler}</h2>
         </div>
       </div>
       <Button><IoSend /></Button>

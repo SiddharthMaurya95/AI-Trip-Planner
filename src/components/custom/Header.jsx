@@ -3,6 +3,7 @@ import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import {googleLogout} from '@react-oauth/google'
 import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios'
 import {
@@ -20,6 +21,7 @@ import {
 } from "@/components/ui/popover"
 
 function Header() {
+  const navigate=useNavigate();
   const GetUserProfile = (tokenInfo) => {
     axios
       .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokenInfo?.access_token}`, {
@@ -43,7 +45,8 @@ const [openDialog,setOpenDialog]=useState(false);
 const login=useGoogleLogin({onSuccess:(result)=>GetUserProfile(result),onError:(error)=>console.log(error)})
   return (
     <div className='p-2 shadow-sm flex justify-between items-center'>
-     <img src="/logoipsum-280.svg"/>
+      <Link to={"/"}>
+     <img src="/logoipsum-280.svg"/></Link>
      <div>{user?<div className='flex items-center gap-3'>
       <Link to={'/create-trip'}>
       <Button variant="outline" className='rounded-full'>Create Trip</Button></Link>
@@ -51,7 +54,7 @@ const login=useGoogleLogin({onSuccess:(result)=>GetUserProfile(result),onError:(
       <Button variant="outline" className='rounded-full'>My Trips</Button></Link>
       <Popover>
   <PopoverTrigger><img src={user?.picture} className='h-[35px] w-[35px] rounded-full bg-white' alt="" /></PopoverTrigger>
-  <PopoverContent ><h2 className='cursor-pointer' onClick={()=>{googleLogout();localStorage.clear();window.location.reload();}}>Logout</h2></PopoverContent>
+  <PopoverContent ><h2 className='cursor-pointer' onClick={()=>{googleLogout();localStorage.clear();navigate('/');}}>Logout</h2></PopoverContent>
 </Popover>
      </div>:
       <Button onClick={()=>{setOpenDialog(true)}}>Sign in</Button>
