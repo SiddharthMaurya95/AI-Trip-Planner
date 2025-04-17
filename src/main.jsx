@@ -9,7 +9,7 @@ import { Toaster } from './components/ui/sonner.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Viewtrip from './view-trip/tripid/index.jsx';
 import MyTrips from './my-trip/index.jsx';
-
+import Footer from './view-trip/components/Footer.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -17,6 +17,7 @@ const router = createBrowserRouter([
       <>
         <Header />
         <App />
+        <Footer/>
       </>
     ),
   },
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       <>
         <Header />
         <CreateTrip />
+        <Footer/>
       </>
     ),
   },
@@ -35,6 +37,7 @@ const router = createBrowserRouter([
       <>
         <Header />
         <Viewtrip />
+        <Footer/>
       </>
     ),
   },
@@ -44,6 +47,7 @@ const router = createBrowserRouter([
       <>
         <Header />
         <MyTrips />
+        <Footer/>
       </>
     ),
   },

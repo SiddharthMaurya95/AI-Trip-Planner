@@ -46,8 +46,8 @@ const login=useGoogleLogin({onSuccess:(result)=>GetUserProfile(result),onError:(
   return (
     <div className='p-2 shadow-sm flex justify-between items-center'>
       <Link to={"/"}>
-     <img src="/logoipsum-280.svg"/></Link>
-     <div>{user?<div className='flex items-center gap-3'>
+     <img className='h-[50px]' src="/reshot-icon-travel-calendar-79ZK3GCWUT.svg"/></Link>
+     <div>{user?<div className='flex items-center gap-2'>
       <Link to={'/create-trip'}>
       <Button variant="outline" className='rounded-full'>Create Trip</Button></Link>
       <Link to={'/my-trips'}>

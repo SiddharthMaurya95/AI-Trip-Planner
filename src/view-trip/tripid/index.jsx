@@ -6,7 +6,7 @@ import { db } from '../../service/firebaseConfig';
 import { doc,getDoc } from 'firebase/firestore'
 import Hotels from '../components/Hotels'
 import PlacesToVisit from '../components/PlacesToVisit';
-import Footer from '../components/Footer';
+
 function Viewtrip() {
     const {tripId}=useParams();
     const [trip,setTrip]=useState([]);
@@ -31,8 +31,6 @@ function Viewtrip() {
       <Hotels trip={trip}></Hotels>
       {/* Daily routine */}
       <PlacesToVisit trip={trip}></PlacesToVisit>
-      {/* footer */}
-      <Footer trip={trip}></Footer>
     </div>
   )
 }
