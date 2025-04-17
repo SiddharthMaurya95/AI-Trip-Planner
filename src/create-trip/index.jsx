@@ -42,10 +42,18 @@ const onGenerateTrip=async()=>{
     setOpenDialog(true);
     return;
   }
-  if(formData?.noOfDays>5&&(!formData?.budget||!formData?.traveller||!formData?.noOfDays)){
-    toast("Please Input all the Details and make sure no. of days is less than 6")
+  if (
+    !formData || // Check if formData itself is undefined or null
+    !formData.budget || // Check if budget is falsy (null, undefined, 0, or "")
+    !formData.traveler ||
+    !formData.noOfDays ||
+    !formData.location ||
+    formData.noOfDays >= 6 || formData.noOfDays==0 // Enforce that noOfDays must be less than 6
+  ) {
+    toast("Please input all the details and ensure the number of days is less than 6");
     return;
   }
+  
   setLoading(true);
   const FINAL_PROMPT=AI_PROMPT
   .replace('{location}',formData?.location)
@@ -134,7 +142,7 @@ const GetUserProfile = (tokenInfo) => {
     <DialogHeader>
       <DialogTitle></DialogTitle>
       <DialogDescription>
-     <img src="/logoipsum-280.svg"/>
+     <img className='h-[50px]' src="/reshot-icon-travel-calendar-79ZK3GCWUT.svg"/>
      <h2 className='font-bold text-lg mt-7'>Sign In With Google</h2>
      <p>Sign In with the app securly with Google authentication securely</p>
      <Button onClick={login} className='w-full mt-5 flex gap-4 items-center'><FcGoogle className='h-7 w-7' />

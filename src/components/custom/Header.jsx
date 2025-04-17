@@ -65,7 +65,7 @@ const login=useGoogleLogin({onSuccess:(result)=>GetUserProfile(result),onError:(
          <DialogHeader>
            <DialogTitle></DialogTitle>
            <DialogDescription>
-          <img src="/logoipsum-280.svg"/>
+           <img className='h-[50px]' src="/reshot-icon-travel-calendar-79ZK3GCWUT.svg"/>
           <h2 className='font-bold text-lg mt-7'>Sign In With Google</h2>
           <p>Sign In with the app securly with Google authentication securely</p>
           <Button onClick={login} className='w-full mt-5 flex gap-4 items-center'><FcGoogle className='h-7 w-7' />
