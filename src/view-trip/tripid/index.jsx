@@ -15,7 +15,6 @@ function Viewtrip() {
         const docRef=doc(db,'AItrips',tripId);
         const docSnap=await getDoc(docRef);
         if(docSnap.exists()){
-            console.log("Document:",docSnap.data());
             setTrip(docSnap.data());
         }
         else{

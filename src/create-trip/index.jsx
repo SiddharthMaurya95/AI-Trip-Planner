@@ -8,6 +8,7 @@ import { SelectTravelesList } from '../constants/options'
 import { Button } from '../components/ui/button'
 import { toast } from "sonner"
 import { chatSession } from '../service/AIModal'
+import LoadingDialog from './loaderDialog.jsx';
 import {
   Dialog,
   DialogContent,
@@ -151,7 +152,7 @@ const GetUserProfile = (tokenInfo) => {
     </DialogHeader>
   </DialogContent>
 </Dialog>
-
+ <LoadingDialog loading={loading}></LoadingDialog>
     </div>
   )
 }

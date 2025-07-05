@@ -9,13 +9,17 @@ function HotelCardItem({trip,i}) {
   const[j,setJ]=useState(0);
      const [PhotoUrl,setPhotoUrl]=useState();
       useEffect(()=>{
-        trip&&GetPlacePhoto(j);
+        trip&&GetPlacePhoto(0);
       },[trip])
       useEffect(()=>{
         GetPlacePhoto(j);
       },[j])
        const GetPlacePhoto=async(j)=>{
-        if(trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelImageUrl.startsWith("https://example.com") || j>0){
+        if(j==0){
+          try{
+            if(!trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelImageUrl.startsWith("https://example.com")){
+              throw new Error("");
+            }
           const searchTerm = trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelName+","+trip?.userSelection?.location+" -map -logo -icon -drawing -cartoon";
       const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image&imgSize=medium';
       
@@ -23,19 +27,41 @@ function HotelCardItem({trip,i}) {
         .then(response => response.json())
         .then(data => {
           if (data.items && data.items.length > 0) {
-            const firstImage = data.items[j];
+            const firstImage = data.items[0];
             const PhotoUrl=firstImage.link;
             setPhotoUrl(PhotoUrl);
-            trip.tripData[0].hotelOptions[i].hotelImageUrl=PhotoUrl;
+            trip.tripData[0].hotelOptions[i].hotelImageUrl=data;
+            
             modifyDocument('AItrips',trip?.id,{tripData:trip.tripData});
+            console.log(trip);
           } else {
             console.log('No images found.');
           }
         })
-        .catch(error => console.error('Error:', error));}
+        .catch(error => console.error('Error:', error));}catch(e){
+           const data=trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelImageUrl
+         try{ const firstImage = data.items[0];
+            const PhotoUrl=firstImage.link;
+            setPhotoUrl(PhotoUrl);}
+            catch(e){
+              setPhotoUrl(data)
+            }
+        }}
+        else if(j>0){
+          console.log(j);
+          const data=trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelImageUrl
+          const firstImage = data.items[j];
+            const PhotoUrl=firstImage.link;
+            setPhotoUrl(PhotoUrl);
+        }
         else{
-          const PhotoUrl=trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelImageUrl;
-          setPhotoUrl(PhotoUrl);
+          const data=trip?.tripData?.[0]?.hotelOptions?.[i]?.hotelImageUrl
+         try{ const firstImage = data.items[0];
+            const PhotoUrl=firstImage.link;
+            setPhotoUrl(PhotoUrl);}
+            catch(e){
+              setPhotoUrl(data)
+            }
         }
         }
 

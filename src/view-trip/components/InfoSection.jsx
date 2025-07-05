@@ -9,13 +9,17 @@ function InfoSection({trip}) {
   const[j,setJ]=useState(0);
   const [PhotoUrl,setPhotoUrl]=useState();
   useEffect(()=>{
-    trip&&GetPlacePhoto(j);
+    trip&&GetPlacePhoto(0);
   },[trip])
   useEffect(()=>{
                   GetPlacePhoto(j);
                 },[j])
   const GetPlacePhoto=async(j)=>{
-  if(trip?.locationImageUrl=='url'|| j>0){
+  if(j==0){
+   try{
+    if (!trip?.locationImageUrl.startsWith("url")){
+      throw new Error("");
+    }
 const searchTerm = trip?.userSelection?.location+" landscape photo"+" -map -logo -icon -drawing -cartoon";
 
 const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image&imgSize=large';
@@ -25,18 +29,38 @@ fetch(apiUrl)
   .then(data => {
     if (data.items && data.items.length > 0) {
       console.log(j)
-      const firstImage = data.items[j];
+      const firstImage = data.items[0];
       const PhotoUrl=firstImage.link;
       setPhotoUrl(PhotoUrl);
-      modifyDocument('AItrips',trip?.id,{locationImageUrl:PhotoUrl});
+      modifyDocument('AItrips',trip?.id,{locationImageUrl:data});
     } else {
       console.log('No images found.');
     }
   })
-  .catch(error => console.error('Error:', error));}
+  .catch(error => console.error('Error:', error));}catch(e){
+    const data=trip?.locationImageUrl
+         try{ const firstImage = data.items[0];
+            const PhotoUrl=firstImage.link;
+            setPhotoUrl(PhotoUrl);}
+            catch(e){
+              setPhotoUrl(data)
+            }
+  }}
+   else if(j>0){
+    console.log(j);
+          const data=trip?.locationImageUrl
+          const firstImage = data.items[j];
+            const PhotoUrl=firstImage.link;
+            setPhotoUrl(PhotoUrl);
+        }
   else{
-    const PhotoUrl=trip?.locationImageUrl;
-    setPhotoUrl(PhotoUrl);
+    const data=trip?.locationImageUrl
+         try{ const firstImage = data.items[0];
+            const PhotoUrl=firstImage.link;
+            setPhotoUrl(PhotoUrl);}
+            catch(e){
+              setPhotoUrl(data)
+            }
   }
   }
   return (

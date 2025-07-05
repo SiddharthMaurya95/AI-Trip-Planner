@@ -18,6 +18,7 @@ function PlacesToVisit({trip}) {
         var a=trip?.tripData?.[0]?.itinerary;
         const userElements = [];
         var i=1;
+       
         for(const key in a){
             if (a.hasOwnProperty(key)) {
                 const p=a[key];

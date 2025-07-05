@@ -8,7 +8,7 @@ function Hotels({trip}) {
         const userElements = [];
         for(let i=0;i<a;i++){
             userElements.push(
-                <HotelCardItem trip={trip} i={i}/>);
+                <HotelCardItem key={i} trip={trip} i={i}/>);
         }
         return userElements;
     }
