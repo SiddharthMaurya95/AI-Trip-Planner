@@ -6,13 +6,17 @@ import axios from "axios";
 import { db,modifyDocument } from '../../service/firebaseConfig';
 import {ref,set,update} from "firebase/database";
 function InfoSection({trip}) {
+  const[j,setJ]=useState(0);
   const [PhotoUrl,setPhotoUrl]=useState();
   useEffect(()=>{
-    trip&&GetPlacePhoto();
+    trip&&GetPlacePhoto(j);
   },[trip])
-  const GetPlacePhoto=async()=>{
-  if(trip?.locationImageUrl=='url'){
-const searchTerm = trip?.userSelection?.location+" landscape";
+  useEffect(()=>{
+                  GetPlacePhoto(j);
+                },[j])
+  const GetPlacePhoto=async(j)=>{
+  if(trip?.locationImageUrl=='url'|| j>0){
+const searchTerm = trip?.userSelection?.location+" landscape photo"+" -map -logo -icon -drawing -cartoon";
 
 const apiUrl = 'https://customsearch.googleapis.com/customsearch/v1?q='+searchTerm+'&cx='+import.meta.env.VITE_CSE_ID+'&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY+'&searchType=image&imgSize=large';
 
@@ -20,7 +24,8 @@ fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     if (data.items && data.items.length > 0) {
-      const firstImage = data.items[0];
+      console.log(j)
+      const firstImage = data.items[j];
       const PhotoUrl=firstImage.link;
       setPhotoUrl(PhotoUrl);
       modifyDocument('AItrips',trip?.id,{locationImageUrl:PhotoUrl});
@@ -36,7 +41,11 @@ fetch(apiUrl)
   }
   return (
     <div>
-      <img src={PhotoUrl?PhotoUrl:'https://placehold.co/600x400'} className="w-full h-[340px] object-cover rounded" alt="" />
+      <img src={PhotoUrl?PhotoUrl:'https://placehold.co/600x400'} className="w-full h-[340px] object-cover rounded" alt="" 
+      onError={e => {
+    e.target.onerror = null; // Prevents infinite loop
+     setJ(prevJ => prevJ + 1);
+  }}/>
       <div className='flex justify-between items-center gap-2'>
       <div className='my-5 flex flex-col gap-2'>
         <h2 className='font-bold text-2xl'>
